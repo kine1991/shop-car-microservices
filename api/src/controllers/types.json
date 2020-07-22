@@ -1,0 +1,62 @@
+[
+  {
+    "category": "motorcycle",
+    "type": "scooter",
+    "imageUrl": "https://i.imgur.com/UT2e3ew.jpg"
+  },
+  {
+    "category": "motorcycle",
+    "type": "cross",
+    "imageUrl": "https://i.imgur.com/a4UZXSr.png"
+  },
+  {
+    "category": "motorcycle",
+    "type": "sport",
+    "imageUrl": "https://i.imgur.com/Qu5r0sS.jpg"
+  },
+  {
+    "category": "motorcycle",
+    "type": "classic",
+    "imageUrl": "https://i.imgur.com/eGEib2I.jpg"
+  },
+  {
+    "category": "car",
+    "type": "coupe",
+    "imageUrl": "https://i.imgur.com/pYvXR9i.jpg"
+  },
+  {
+    "category": "car",
+    "type": "suv",
+    "imageUrl": "https://i.imgur.com/KhQFikD.jpg"
+  },
+  {
+    "category": "car",
+    "type": "pickup",
+    "imageUrl": "https://i.imgur.com/UTeMwkp.jpg"
+  },
+  {
+    "category": "car",
+    "type": "van",
+    "imageUrl": "https://i.imgur.com/R1rkGDe.jpg"
+  },
+  {
+    "category": "car",
+    "type": "truck",
+    "imageUrl": "https://i.imgur.com/UQvwlPA.jpg"
+  },
+  {
+    "category": "car",
+    "type": "sedan",
+    "imageUrl": "https://i.imgur.com/wuXcTAy.jpg"
+  },
+  {
+    "category": "car",
+    "type": "hatchback",
+    "imageUrl": "https://i.imgur.com/90VSLFl.jpg"
+  },
+  {
+    "category": "car",
+    "type": "sport_car",
+    "imageUrl": "https://i.imgur.com/90VSLFl.jpg"
+  }
+]

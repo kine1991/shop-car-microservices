@@ -1,0 +1,97 @@
+version: '3'
+
+services:
+  frontend:
+    build: ./frontend
+    container_name: cars-shop-frontend
+    ports:
+      - "8080:8080"
+    restart: unless-stopped
+    command: http-server dist -p 8080 -c 1 --push-state
+    # command: serve -s build -l 8080
+    networks:
+      - cars-shop-network
+    
+  auth:
+    build: ./auth
+    container_name: cars-shop-auth
+    ports:
+      - "3002:3002"
+    restart: unless-stopped
+    command: npm run start
+    environment:
+      - PORT=3002
+      - MONGO_URL=mongodb://auth_db:27017/api
+      - API_URL=http://posts.com
+      - JWT_SECRET=hello
+      - JWT_EXPIRES_IN=90d
+      - JWT_COOKIE_EXPIRES_IN=90
+    depends_on:
+      - auth_db
+    networks:
+      - cars-shop-network
+    
+  api:
+    build: ./api
+    container_name: cars-shop-api
+    restart: unless-stopped
+    command: npm run start
+    ports:
+      - "3001:3001"
+    environment:
+      - PORT=3001
+      - MONGO_URL=mongodb://api_db:27017/api
+      - AUTH_API_URL=http://auth:3002/api/auth
+      - JWT_SECRET=hello
+      - JWT_EXPIRES_IN=90d
+      - JWT_COOKIE_EXPIRES_IN=90
+    depends_on:
+      - api_db
+    networks:
+      - cars-shop-network
+
+  auth_db:
+    image: mongo:latest
+    container_name: cars-shop-auth-db
+    volumes:
+      - mongodb_auth:/data/db
+    networks:
+      - cars-shop-network
+
+  api_db:
+    image: mongo:latest
+    container_name: cars-shop-api-db
+    volumes:
+      - mongodb_api:/data/db
+    networks:
+      - cars-shop-network
+
+  nginx:
+    image: nginx:stable-alpine
+    container_name: cars-shop-nginx
+    ports:
+      - "81:81"
+    volumes:
+      - ./nginx/nginx.conf.prod:/etc/nginx/conf.d/nginx.conf
+    depends_on:
+      - frontend
+      - api
+      - auth
+    networks:
+      - cars-shop-network
+
+volumes:
+  mongodb_api:
+  mongodb_auth:
+
+networks:
+  cars-shop-network:
+    driver: bridge
+
+    # /Users/nikolay/Desktop/copy_from_docker
+    # 
+
+    # cp b850bdea9908:/dev /Users/nikolay/Desktop/copy_from_docker
+
+# docker inspect my-docker-apps_mongodb_api
+# cd ~/Library/Containers/com.docker.docker/Data/vms

@@ -1,0 +1,29 @@
+version: '3'
+
+services:
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile.dev
+    command: npm run dev
+    stdin_open: true
+    tty: true
+    volumes:
+      - ./frontend/src:/usr/src/app/src
+
+  auth:
+    stdin_open: true
+    tty: true
+    volumes:
+      - ./auth/src:/usr/src/app/src
+
+  api:
+    stdin_open: true
+    tty: true
+    volumes:
+      - ./api/src:/usr/src/app/src
+
+  nginx:
+    volumes:
+      - ./nginx/nginx.conf.dev:/etc/nginx/conf.d/nginx.conf
+# docker-compose -f docker-compose.yml -f docker-compose.dev.yml up --build

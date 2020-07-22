@@ -1,0 +1,17 @@
+server {
+  listen 81;
+
+  server_name posts.com;
+
+  location / {
+    proxy_pass http://frontend:8080;
+  }
+
+  location /api {
+    proxy_pass http://api:3001;
+  }
+
+  location /api/auth {
+    proxy_pass http://auth:3002;
+  }
+}
